@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel= "stylesheet" href = "{% static 'Typing/styles.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Tutor</title>
+
+</head>
+<body>
+
+    <nav class = 'navbar'>
+        <ul>
+            <li> <a href = "{% url 'Home'%}">Home </a> </li>
+            <li> <a href = "{% url 'Typing:Practise'%}">Practise </a> </li>
+            <li> <a href = "{% url 'Typing:Word_bank'%}">Wordbank </a> </li>
+        </ul>
+
+    </nav>
+
+    {%block content%}{%endblock%}
+    <main>
+    <p> {% lorem 1 b random %}</p>
+    </main>
+</body>
+</html>
