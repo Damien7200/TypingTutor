@@ -1,4 +1,42 @@
+<!DOCTYPE html>
 {%extends "Typing/base.html"%}
 {%block content%}
-    <h1>PRACTISE</h1>
+
+<div class = "typing-box-container">
+    <textarea class = "typing-box" id= "typing-box" rows = '5' cols = '50' wrap = 'hard' >
+       
+        {% comment %} Typing box {% endcomment %}
+    </textarea>
+</div>
+
+<div class = "TText-container">
+    <div class = "TText" id= "TText">
+        
+            {{Words}}
+        
+        {% comment %} Text to type {% endcomment %}
+    </div>
+</div>
+
+
+
+{% comment %} <p class="start", id="start">Start Practise</p>
+<button type="button" onclick="myFunction()">CLICK</button> {% endcomment %}
+
+<script>
+    var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    function myFunction() {
+        document.getElementById("start").innerHTML = lorem;
+
+    }
+document.getElementById('typing-box').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+  }
+});
+   
+</script>
+
+
+
 {%endblock%}
