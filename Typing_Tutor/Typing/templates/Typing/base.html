@@ -15,15 +15,16 @@
     <nav class = 'navbar'>
         <ul>
             <li> <a href = "{% url 'Home'%}">Home </a> </li>
-            <li> <a href = "{% url 'Typing:Practise'%}">Practise </a> </li>
+
+            <li> <a href = "{% url 'Typing:practise'  %}">Practise </a> </li>
+        
+
             <li> <a href = "{% url 'Typing:Word_bank'%}">Wordbank </a> </li>
         </ul>
 
     </nav>
 
     {%block content%}{%endblock%}
-    <main>
-    <p> test</p>
-    </main>
+
 </body>
 </html>

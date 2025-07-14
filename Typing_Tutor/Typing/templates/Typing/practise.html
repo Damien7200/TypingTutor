@@ -1,17 +1,19 @@
-<!DOCTYPE html>
+
 {%extends "Typing/base.html"%}
 {%block content%}
+<header>
+    <a href = "{% url 'Typing:settings'%}">settings</a>
+</header>
 
 <div class = "typing-box-container">
-    <textarea class = "typing-box" id= "typing-box" rows = '5' cols = '50' wrap = 'hard' >
-       
-        {% comment %} Typing box {% endcomment %}
-    </textarea>
-</div>
+    <textarea class = "typing-box" cols = '100' id= "typing-box" colomns wrap = 'hard' spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
 
-<div class = "TText-container">
+
+
+
     <div class = "TText" id= "TText">
-        
+            
+            
             {{Words}}
         
         {% comment %} Text to type {% endcomment %}
@@ -20,23 +22,72 @@
 
 
 
-{% comment %} <p class="start", id="start">Start Practise</p>
-<button type="button" onclick="myFunction()">CLICK</button> {% endcomment %}
+
+
+
+<div id = 'help-bar'>
+
+    <p>press Tab to restart</p>
+
+</div>
+
+<div class="difficulty-container" >
+    <label for "difficulty-select">Difficulty</label>
+    <select id="difficulty-select" name="difficulty">
+        <option value="easy" selected>Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+    </select>
+</div>
+
 
 <script>
-    var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    function myFunction() {
-        document.getElementById("start").innerHTML = lorem;
+document.addEventListener('DOMContentLoaded', function() {
+const difficultySelect = document.getElementById('difficulty-select');
 
-    }
+
+
 document.getElementById('typing-box').addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
     event.preventDefault();
   }
+ 
+  if (event.key == 'Tab'){
+    const inputBox = document.getElementById("typing-box")
+    inputBox.value = '';
+  }
+
+
 });
    
+function getCookie(name) {
+    const cookie = document.cookie.split(';').find(c => c.trim().startsWith(name + '='));
+    return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
+    }
+function updateWordBank(difficulty) {
+    console.log("Fetching words for:", difficulty);
+    fetch("{% url 'Typing:update_word_bank' %}", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ difficulty: difficulty })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('TText').innerHTML = data.html;
+    });
+    }
+
+    //  Handle user selection
+    difficultySelect.addEventListener('change', event => {
+        const CurrentValue = event.target.value
+        updateWordBank(CurrentValue);
+    });
+    updateWordBank(difficultySelect.value)
+});
 </script>
 
 
-
-{%endblock%}
+{% endblock %}
