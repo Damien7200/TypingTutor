@@ -14,7 +14,7 @@
     <div class = "TText" id= "TText">
             
             
-            {{Words}}
+            
         
         {% comment %} Text to type {% endcomment %}
     </div>
@@ -31,14 +31,27 @@
 
 </div>
 
-<div class="difficulty-container" >
-    <label for "difficulty-select">Difficulty</label>
+<div id = 'difficulty-container' class="difficulty-container" >
+    <label for ="difficulty-select">Difficulty</label>
     <select id="difficulty-select" name="difficulty">
         <option value="easy" selected>Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
     </select>
 </div>
+<div class="topic-container" >
+    <label for = "topic-select">Word Topic</label>
+    <select id="topic-select" name="topic">
+        <option value = "General" selected>General Terminology</option>
+        <option value="PF" >Programming fundamentals</option>
+        <option value="OOP">Object-oriented programming</option>
+        <option value="PM">Programming mechatronics</option>
+        <option value="SSA" >Secure software architecture</option>
+        <option value="PFTW">Programming for the web</option>
+        <option value="SA">Software automation</option>
+    </select>
+</div>
+
 
 <div id = 'results-container'></div>
 <script>
@@ -47,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const difficultySelect = document.getElementById('difficulty-select');
 const Typing_box = document.getElementById('typing-box')
 const wpm = "wpm placeholder"
+const TopicSelector = document.getElementById("topic-select");
 
 Typing_box.addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
@@ -91,19 +105,51 @@ function updateWordBank(difficulty) {
     .then(data => {
         document.getElementById('TText').innerHTML = data.html;
         words = data.words
+    
         
     });
     }
 
+/*
+difficultySelect.addEventListener('change', event => {
+    const CurrentValue = event.target.value
+    updateWordBank(CurrentValue);
+});
+updateWordBank(difficultySelect.value) // pass the value from the determinator into here. 
+*/
+
+function determinator(){
+    //needs to return a difficulty value of whatever the user has chosen. general is hard
     
-    difficultySelect.addEventListener('change', event => {
-        const CurrentValue = event.target.value
-        updateWordBank(CurrentValue);
-    });
-    updateWordBank(difficultySelect.value)
+    const Dcontainer = document.getElementById('difficulty-container');
+    if (TopicSelector.value == 'General'){
+        console.log("general")
+        updateWordBank(difficultySelect.value)
+        Dcontainer.style.display = 'inline'
+       
+
+            
+ 
+
+    }else{
+        console.log('not genral')
+        Dcontainer.style.display = 'none'
+        updateWordBank(TopicSelector.value)
+    }
 
 
+};
+determinator()
+TopicSelector.addEventListener('change', determinator)
 
+difficultySelect.addEventListener('change', function(event) {
+    if (TopicSelector.value == 'General'){
+        updateWordBank(event.target.value)
+    }
+
+
+ });
+            
 
 function Results(){
     const Results_container = document.getElementById('results-container')

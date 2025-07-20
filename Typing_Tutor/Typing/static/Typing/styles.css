@@ -101,9 +101,10 @@ h1 {
 }
 
 .difficulty-container {
+  display: inline;
   position: absolute;
-  margin-left: 90vw;
- 
+  margin-left: 88vw;
+  margin-top: 10vh;
  
   font-size: 20px;
   font-style: italic;
@@ -126,4 +127,15 @@ h1 {
   align-items: center;
   text-align: center;
   z-index: 1000;
+}
+
+.topic-container {
+  
+  position: absolute;
+  margin-left: 84vw;
+  font-size: 20px;
+  font-style: italic;
+
+
+  color: #7e7979;
 }

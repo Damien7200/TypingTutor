@@ -62,37 +62,104 @@ def settings(request):
 def get_random_word(difficulty):
         
 
-    basic_terms = [
-    "software", "algorithm", "binary", "debug", "function", "integer",
-    "string", "boolean", "output", "input", "loop", "array",
-    "variable", "test", "code", "file", "list", "user", "data", "IDE"
-]
+    programming_terms = {
+        "easy": [
+            "software", "algorithm", "binary", "debug", "function", "integer",
+            "string", "boolean", "output", "input", "loop", "array",
+            "variable", "test", "code", "file", "list", "user", "data", "IDE"
+        ],
+        "medium": [
+            "iteration", "selection", "structure", "pseudocode", "refinement",
+            "abstraction", "subprogram", "control", "stack", "record", "module",
+            "testing", "runtime", "syntax", "logic", "maintenance", "installation",
+            "encryption", "validation", "hashing"
+        ],
+        "hard": [
+            "backtracking", "sandboxing", "cryptography", "two_complement",
+            "hexadecimal", "authentication", "authorisation", "penetration",
+            "vulnerability", "confidentiality", "availability", "race_condition",
+            "exception", "session_management", "cross_site_scripting",
+            "flowchart", "imperative", "object_oriented", "functional",
+            "session", "abnormal", "refactor", "compliance"
+        ],
+        "PF": [
+            "compile",
+            "execute",
+            "constant",
+            "operator",
+            "expression",
+            "looping",
+            "recursion",
+            "stack",
+            "queue",
+            "pointer"
+        ],
+        "OOP": [
+            "abstraction",
+            "inheritance",
+            "polymorphism",
+            "encapsulation",
+            "override",
+            "attribute",
+            "prototype",
+            "module",
+            "composition",
+            "association"
+        ],
+        "PM": [
+            "actuation",
+            "encoder",
+            "servo",
+            "calibration",
+            "robotics",
+            "automation",
+            "controller",
+            "circuit",
+            "analog",
+            "digital"
+        ],
+        "SSA": [
+            "malware",
+            "phishing",
+            "token",
+            "firewall",
+            "cipher",
+            "payload",
+            "breach",
+            "sandbox",
+            "checksum",
+            "backdoor"
+        ],
+        "PFTW": [
+            "cookie",
+            "session",
+            "router",
+            "websocket",
+            "markup",
+            "template",
+            "endpoint",
+            "backend",
+            "frontend",
+            "browser"
+        ],
+        "SA": [
+            "workflow",
+            "trigger",
+            "pipeline",
+            "scheduler",
+            "build",
+            "deploy",
+            "monitor",
+            "script",
+            "rollback",
+            "job"
+        ]
+    }
+    WBwords = programming_terms[difficulty]
+    r.shuffle(WBwords)
+   
+    return WBwords
 
-    medium_terms = [
-    "iteration", "selection", "structure", "pseudocode", "refinement",
-    "abstraction", "subprogram", "control", "stack", "record", "module",
-    "testing", "runtime", "syntax", "logic", "maintenance", "installation",
-    "encryption", "validation", "hashing"
-]
-
-    difficult_terms = [
-    "backtracking", "sandboxing", "cryptography", "two_complement",
-    "hexadecimal", "authentication", "authorisation", "penetration",
-    "vulnerability", "confidentiality", "availability", "race_condition",
-    "exception", "session_management", "cross_site_scripting",
-    "flowchart", "imperative", "object_oriented", "functional",
-    "session", "abnormal", "refactor", "compliance"
-]
-    if difficulty == "easy":
-        r.shuffle(basic_terms)
-        return basic_terms
-    elif difficulty == "medium":
-        r.shuffle(medium_terms)
-        return medium_terms
-    elif difficulty == "hard":
-        r.shuffle(difficult_terms)
-        return difficult_terms
-    else:
-        return []
+    
 
 
