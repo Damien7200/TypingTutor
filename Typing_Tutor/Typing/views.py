@@ -39,26 +39,16 @@ def Update_word_bank(request):
 
     
         html = render_to_string('Typing/partials/wordbank.html', {'word_bank': words})
+        return JsonResponse({'html': html, 'words': words})
+
+
+def Results(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        wpm = data.get('wpm')
+        html = render_to_string('Typing/partials/results.html', {'wpm' : wpm})
         return JsonResponse({'html': html})
-
-    # do something with the difficulty value
     
-    
-    # if request.method == 'POST':
-    #     difficulty = request.POST.get('difficulty')
-    #     print(difficulty)
-    #difficulty = request.session['difficulty']
-    # print(request.session['difficulty'])
-    # if request.session['difficulty'] == None:
-    #     request.session['difficulty'] = 'easy'
-    # else:
-    #     difficulty = request.session['difficulty']
-  
-
-    
-    
-    # return render(request, "Typing/practise.html", {'Words' : words} )
-
 def Wordbank(request):
     return render (request, "Typing/Word_bank.html")
 

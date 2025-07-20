@@ -40,14 +40,15 @@
     </select>
 </div>
 
-
+<div id = 'results-container'></div>
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
 const difficultySelect = document.getElementById('difficulty-select');
+const Typing_box = document.getElementById('typing-box')
+const wpm = "wpm placeholder"
 
-
-
-document.getElementById('typing-box').addEventListener('keydown', function(event) {
+Typing_box.addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
     event.preventDefault();
   }
@@ -59,13 +60,25 @@ document.getElementById('typing-box').addEventListener('keydown', function(event
 
 
 });
-   
+
+
+Typing_box.addEventListener('input', function(){
+    const CurrentLength = Typing_box.value.length;
+    const WordLength = words.length;
+    if (CurrentLength == WordLength){
+        //render the results template
+        console.log('sufficient characters typed');
+        Results()
+    }
+
+});
 function getCookie(name) {
     const cookie = document.cookie.split(';').find(c => c.trim().startsWith(name + '='));
     return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
     }
 function updateWordBank(difficulty) {
     console.log("Fetching words for:", difficulty);
+    //sending request to view update_word_bank which tehn updates the partial template, and then sends a response witht the partial template, letting it be rendered. 
     fetch("{% url 'Typing:update_word_bank' %}", {
         method: "POST",
         headers: {
@@ -77,17 +90,55 @@ function updateWordBank(difficulty) {
     .then(response => response.json())
     .then(data => {
         document.getElementById('TText').innerHTML = data.html;
+        words = data.words
+        
     });
     }
 
-    //  Handle user selection
+    
     difficultySelect.addEventListener('change', event => {
         const CurrentValue = event.target.value
         updateWordBank(CurrentValue);
     });
     updateWordBank(difficultySelect.value)
+
+
+
+
+function Results(){
+    const Results_container = document.getElementById('results-container')
+    const inputBox = document.getElementById("typing-box")
+
+    fetch ("{%url 'Typing:Results'%}",{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body:JSON.stringify({wpm : wpm})
+    })
+    .then(response => response.json())
+    .then(data=>{
+        Results_container.innerHTML = data.html;
+        Results_container.style.display = 'block';
+        console.log('template rendered')
+        inputBox.blur()
+
+    });
+
+    const spaceHandler = function(event) {
+        if (event.key === "Enter") {
+            Results_container.style.display = 'none';
+            inputBox.value = '';
+            document.removeEventListener("keydown", spaceHandler); // Remove listener
+        }
+    };
+    document.addEventListener("keydown", spaceHandler);
+};
+
 });
 </script>
+
 
 
 {% endblock %}

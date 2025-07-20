@@ -9,4 +9,5 @@ urlpatterns = [
     path("settings/", views.settings, name="settings"),
     path('practise/', views.Practise, name='practise'),
     path('update_word_bank/', views.Update_word_bank, name='update_word_bank'),
+    path('Results/', views.Results, name='Results'),
 ]
