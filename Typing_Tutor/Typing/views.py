@@ -6,6 +6,7 @@ import json
 from django.template.loader import render_to_string
 
 
+
 def home(request):
     return render(request, "Typing/home.html")
 
@@ -17,7 +18,7 @@ def Practise(request):
     else:
         difficulty = request.session['difficulty']
 
-    words = get_random_word(difficulty)
+    words = get_random_word(request, difficulty)
     words = " ".join(words)
     print(f"{difficulty} session ")
     return render(request, "Typing/practise.html", {'Words' : words, 'difficulty' : difficulty})
@@ -34,7 +35,7 @@ def Update_word_bank(request):
         data = json.loads(request.body)
         print("Difficulty received:", data)
         difficulty = data.get('difficulty', 'easy')
-        words = get_random_word(difficulty)  
+        words = get_random_word(request, difficulty)  
         words = " ".join(words)
     
 
@@ -46,8 +47,22 @@ def Update_word_bank(request):
 def Results(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        wpm = data.get('wpm')
-        html = render_to_string('Typing/partials/results.html', {'wpm' : wpm})
+        seconds = data.get('seconds')
+        minutes = seconds/60
+        wpm = round(request.session['Word_Amount']/minutes,2)
+
+        typedOverlay = data.get('typedOverlay')
+        typedOverlay = typedOverlay.strip().split()
+        TText = data.get('TText')
+        TText = TText.strip().split()
+        correctWordCount = 0
+        for i in range(min(len(TText), len(typedOverlay))):
+            if TText[i] == typedOverlay[i]:
+                correctWordCount += 1
+        validWPM = round(correctWordCount/minutes,2)
+
+        #run function to compare the typed overlay words with the target words and check ow many are valid. and the calucalate the valid wpm and send this tot ehtemplate with wpm
+        html = render_to_string('Typing/partials/results.html', {'wpm' : wpm, 'validWPM' : validWPM})
         return JsonResponse({'html': html})
     
 def Wordbank(request):
@@ -60,7 +75,7 @@ def settings(request):
 
     return render(request, "Typing/settings.html")
 
-def get_random_word(difficulty):
+def get_random_word(request, difficulty):
         
 
     programming_terms = {
@@ -159,8 +174,9 @@ def get_random_word(difficulty):
  
     WBwords = programming_terms[difficulty]
     r.shuffle(WBwords)
+    request.session['Word_Amount'] = len(WBwords)
    
-    return programming_terms[difficulty]
+    return (programming_terms[difficulty])
 
     
 

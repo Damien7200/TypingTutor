@@ -1,24 +1,9 @@
 
 {%extends "Typing/base.html"%}
 {%block content%}
-<header>
-    <a href = "{% url 'Typing:settings'%}">settings</a>
-</header>
-
-{% comment %} <div class = "typing-box-container">
-    <textarea class = "typing-box" cols = '100' id= "typing-box" colomns wrap = 'hard' spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
 
 
 
-
-    <div class = "TText" id= "TText">
-            
-            
-            
-        
-      
-    </div>
-</div> {% endcomment %}
 
 <div class="typing-box-container">
     <div id="TText" class="TText"></div>
@@ -68,6 +53,7 @@ const wpm = "wpm placeholder"
 const TopicSelector = document.getElementById("topic-select");
 const TText = document.getElementById('TText')
 const typedOverlay = document.getElementById('typed-text');
+let startTime = null
 
 
 
@@ -96,10 +82,21 @@ Typing_box.addEventListener('keydown', function(event) {
 Typing_box.addEventListener('input', function(){
     const CurrentLength = Typing_box.value.length;
     const WordLength = words.length;
+    if (startTime === null && Typing_box.value.length > 0) {
+        startTime = performance.now();
+    }
+
+    
+
     if (CurrentLength == WordLength){
         //render the results template
         console.log('sufficient characters typed');
-        Results()
+        const endTime = performance.now();
+        const elapsedTime = endTime - startTime;
+        console.log(`Elapsed time: ${elapsedTime} milliseconds`);
+        let seconds = elapsedTime/1000
+        Results(seconds)
+        startTime = null;
     }
 
     const typed = Typing_box.value;
@@ -142,6 +139,8 @@ function updateWordBank(difficulty) {
         TText.innerHTML = data.html;
        
         window.targetText = TText.innerText;
+        typedOverlay.innerHTML = '';
+        Typing_box.value = '';
         words = data.words
         
         
@@ -183,7 +182,7 @@ difficultySelect.addEventListener('change', function(event) {
  });
             
 
-function Results(){
+function Results(seconds){
     const Results_container = document.getElementById('results-container')
     const inputBox = document.getElementById("typing-box")
     
@@ -194,7 +193,7 @@ function Results(){
             'Content-Type': 'application/json',
             'X-CSRFToken': getCookie('csrftoken')
         },
-        body:JSON.stringify({wpm : wpm})
+        body:JSON.stringify({seconds : seconds, typedOverlay: typedOverlay.innerText, TText: TText.innerText})
     })
     .then(response => response.json())
     .then(data=>{
