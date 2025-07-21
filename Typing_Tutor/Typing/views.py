@@ -10,13 +10,13 @@ def home(request):
     return render(request, "Typing/home.html")
 
 def Practise(request):
-   
     difficulty = request.session['difficulty']
     if difficulty == None:
-        request.session['difficulty'] = 'easy'
-        
+        difficulty = 'easy'
+        request.session['difficulty'] = difficulty
     else:
         difficulty = request.session['difficulty']
+
     words = get_random_word(difficulty)
     words = " ".join(words)
     print(f"{difficulty} session ")
@@ -28,6 +28,7 @@ def Update_word_bank(request):
   
    
     
+
     if request.method == "POST":
         print("Received AJAX POST")
         data = json.loads(request.body)
@@ -155,10 +156,11 @@ def get_random_word(difficulty):
             "job"
         ]
     }
+ 
     WBwords = programming_terms[difficulty]
     r.shuffle(WBwords)
    
-    return WBwords
+    return programming_terms[difficulty]
 
     
 

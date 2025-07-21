@@ -5,7 +5,7 @@
     <a href = "{% url 'Typing:settings'%}">settings</a>
 </header>
 
-<div class = "typing-box-container">
+{% comment %} <div class = "typing-box-container">
     <textarea class = "typing-box" cols = '100' id= "typing-box" colomns wrap = 'hard' spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
 
 
@@ -16,11 +16,15 @@
             
             
         
-        {% comment %} Text to type {% endcomment %}
+      
     </div>
+</div> {% endcomment %}
+
+<div class="typing-box-container">
+    <div id="TText" class="TText"></div>
+    <div id="typed-text" class="typed-overlay"></div>
+    <textarea id="typing-box" class="typing-box"></textarea>
 </div>
-
-
 
 
 
@@ -56,11 +60,22 @@
 <div id = 'results-container'></div>
 <script>
 
+window.targetText = '';
 document.addEventListener('DOMContentLoaded', function() {
 const difficultySelect = document.getElementById('difficulty-select');
 const Typing_box = document.getElementById('typing-box')
 const wpm = "wpm placeholder"
 const TopicSelector = document.getElementById("topic-select");
+const TText = document.getElementById('TText')
+const typedOverlay = document.getElementById('typed-text');
+
+
+
+function renderTransparentText(){
+
+}
+
+
 
 Typing_box.addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
@@ -68,8 +83,10 @@ Typing_box.addEventListener('keydown', function(event) {
   }
  
   if (event.key == 'Tab'){
-    const inputBox = document.getElementById("typing-box")
-    inputBox.value = '';
+    event.preventDefault();
+    Typing_box.value = '';
+    typedOverlay.innerHTML = '';    
+
   }
 
 
@@ -85,7 +102,26 @@ Typing_box.addEventListener('input', function(){
         Results()
     }
 
+    const typed = Typing_box.value;
+    const target = window.targetText;
+    const typedOverlay = document.getElementById('typed-text');
+    
+    typedOverlay.innerHTML = ''; // Clear old content
+    
+    for (let i = 0; i < typed.length; i++) {
+        const span = document.createElement('span');
+        span.textContent = typed[i];
+        if (typed[i] === target[i]) {
+            span.classList.add('correct');
+        } else {
+            span.classList.add('wrong');   
+        }
+        typedOverlay.appendChild(span);
+    }
 });
+
+
+
 function getCookie(name) {
     const cookie = document.cookie.split(';').find(c => c.trim().startsWith(name + '='));
     return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
@@ -103,33 +139,29 @@ function updateWordBank(difficulty) {
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById('TText').innerHTML = data.html;
+        TText.innerHTML = data.html;
+       
+        window.targetText = TText.innerText;
         words = data.words
-    
+        
+        
+        
         
     });
     }
 
-/*
-difficultySelect.addEventListener('change', event => {
-    const CurrentValue = event.target.value
-    updateWordBank(CurrentValue);
-});
-updateWordBank(difficultySelect.value) // pass the value from the determinator into here. 
-*/
+
 
 function determinator(){
+   
     //needs to return a difficulty value of whatever the user has chosen. general is hard
     
+
     const Dcontainer = document.getElementById('difficulty-container');
     if (TopicSelector.value == 'General'){
         console.log("general")
         updateWordBank(difficultySelect.value)
         Dcontainer.style.display = 'inline'
-       
-
-            
- 
 
     }else{
         console.log('not genral')
@@ -139,9 +171,9 @@ function determinator(){
 
 
 };
+
 determinator()
 TopicSelector.addEventListener('change', determinator)
-
 difficultySelect.addEventListener('change', function(event) {
     if (TopicSelector.value == 'General'){
         updateWordBank(event.target.value)
@@ -154,6 +186,7 @@ difficultySelect.addEventListener('change', function(event) {
 function Results(){
     const Results_container = document.getElementById('results-container')
     const inputBox = document.getElementById("typing-box")
+    
 
     fetch ("{%url 'Typing:Results'%}",{
         method: "POST",
@@ -172,14 +205,17 @@ function Results(){
 
     });
 
-    const spaceHandler = function(event) {
+    const EnterHandler = function(event) {
+        
         if (event.key === "Enter") {
             Results_container.style.display = 'none';
             inputBox.value = '';
-            document.removeEventListener("keydown", spaceHandler); // Remove listener
+            typedOverlay.innerHTML = '';
+            
+            document.removeEventListener("keydown", EnterHandler);
         }
     };
-    document.addEventListener("keydown", spaceHandler);
+    document.addEventListener("keydown", EnterHandler);
 };
 
 });
