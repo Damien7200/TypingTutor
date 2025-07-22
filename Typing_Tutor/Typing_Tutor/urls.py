@@ -21,7 +21,7 @@ from Typing import views as Typing_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path("", include("Typing.urls")),
-    path("", Typing_views.home, name="Home"),
+    path("", Typing_views.Practise, name="practise"),
     path("Typing/", include(("Typing.urls","Typing"), namespace="Typing")),
 
    

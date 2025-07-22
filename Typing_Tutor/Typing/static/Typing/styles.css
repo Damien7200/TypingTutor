@@ -8,7 +8,7 @@ main {
 }
 h1 {
   text-align: center;
-  color: blue;
+  color: rgb(3, 3, 98);
 }
 
 
@@ -127,9 +127,41 @@ h1 {
   text-align: center;
   z-index: 1000;
   font-size: 20px;
+
+}
+.results-overlay {
+  position: relative;
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
+.Green{
+color: green;
+font-weight: bold;
+}
+.RHead{
 
-/* Character coloring */
+  color: black;
+  font-weight: bold;
+}
+
+.wordbank{
+  margin: 20px;
+  font-size: 20px;
+  margin-left:10%;
+  
+  margin-top: 50px;
+  color: #7e7979;
+
+}
+.wordbank-topic { margin-bottom: 2rem; }
+.wordbank-topic h2 { margin-top: 1.5rem; font-weight: bold; color: #111; text-decoration: underline; text-align: center; }
+.wordbank-topic dt { font-weight: bold; margin-top: .5rem; color:#111; }
+.wordbank-topic dd { margin-left: 1.5rem; margin-bottom: .25rem; color: #666; }
+
+/* Character coloring  for live fedback*/
 .correct { color: green; }
 .wrong { color: red; }

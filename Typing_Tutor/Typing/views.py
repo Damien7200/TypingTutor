@@ -7,8 +7,6 @@ from django.template.loader import render_to_string
 
 
 
-def home(request):
-    return render(request, "Typing/home.html")
 
 def Practise(request):
     difficulty = request.session['difficulty']
@@ -49,31 +47,47 @@ def Results(request):
         data = json.loads(request.body)
         seconds = data.get('seconds')
         minutes = seconds/60
-        wpm = round(request.session['Word_Amount']/minutes,2)
+        
 
         typedOverlay = data.get('typedOverlay')
-        typedOverlay = typedOverlay.strip().split()
+        
         TText = data.get('TText')
+        
+        #accuracy measurment
+        accuracyCounter = 0
+        for i in range(len(typedOverlay)):
+           
+            if typedOverlay[i] == TText[i]:
+                accuracyCounter += 1
+           
+        accuracyMeasure = (accuracyCounter/len(typedOverlay))*100
+       
+                
+        #raw wpm
+        typedOverlay = typedOverlay.strip().split()
         TText = TText.strip().split()
+        wpm = round(len(typedOverlay)/minutes,2)
+
+        #valid wpm
         correctWordCount = 0
         for i in range(min(len(TText), len(typedOverlay))):
             if TText[i] == typedOverlay[i]:
                 correctWordCount += 1
         validWPM = round(correctWordCount/minutes,2)
 
+        
+        
+
         #run function to compare the typed overlay words with the target words and check ow many are valid. and the calucalate the valid wpm and send this tot ehtemplate with wpm
-        html = render_to_string('Typing/partials/results.html', {'wpm' : wpm, 'validWPM' : validWPM})
+        html = render_to_string('Typing/partials/results.html', {'wpm' : wpm, 'validWPM' : validWPM, 'accuracyMeasure': int(accuracyMeasure)})
         return JsonResponse({'html': html})
     
 def Wordbank(request):
     return render (request, "Typing/Word_bank.html")
 
-def settings(request):
-    #get the difficulty fromt he drop down
-    difficulty = request.POST.get('difficulty')
-    request.session['difficulty'] = difficulty
 
-    return render(request, "Typing/settings.html")
+
+
 
 def get_random_word(request, difficulty):
         
@@ -98,78 +112,143 @@ def get_random_word(request, difficulty):
             "flowchart", "imperative", "object_oriented", "functional",
             "session", "abnormal", "refactor", "compliance"
         ],
-        "PF": [
-            "compile",
-            "execute",
-            "constant",
-            "operator",
-            "expression",
-            "looping",
-            "recursion",
-            "stack",
-            "queue",
-            "pointer"
-        ],
-        "OOP": [
-            "abstraction",
-            "inheritance",
-            "polymorphism",
-            "encapsulation",
-            "override",
-            "attribute",
-            "prototype",
-            "module",
-            "composition",
-            "association"
-        ],
-        "PM": [
-            "actuation",
-            "encoder",
-            "servo",
-            "calibration",
-            "robotics",
-            "automation",
-            "controller",
-            "circuit",
-            "analog",
-            "digital"
-        ],
-        "SSA": [
-            "malware",
-            "phishing",
-            "token",
-            "firewall",
-            "cipher",
-            "payload",
-            "breach",
-            "sandbox",
-            "checksum",
-            "backdoor"
-        ],
-        "PFTW": [
-            "cookie",
-            "session",
-            "router",
-            "websocket",
-            "markup",
-            "template",
-            "endpoint",
-            "backend",
-            "frontend",
-            "browser"
-        ],
-        "SA": [
-            "workflow",
-            "trigger",
-            "pipeline",
-            "scheduler",
-            "build",
-            "deploy",
-            "monitor",
-            "script",
-            "rollback",
-            "job"
-        ]
+ "PF": [
+        "compile",
+        "execute",
+        "operator",
+        "expression",
+        "recursion",
+        "stack",
+        "queue",
+        "pointer",
+        "algorithm",
+        "pseudocode",
+        "flowchart",
+        "specification",
+        "integration",
+        "debugging",
+        "maintenance",
+        "selection",
+        "iteration",
+        "abstraction",
+        "data_structure",
+        "twos_complement"
+    ],
+
+    "OOP": [
+        "abstraction",
+        "inheritance",
+        "polymorphism",
+        "encapsulation",
+        "override",
+        "attribute",
+        "prototype",
+        "module",
+        "composition",
+        "association",
+        "generalisation",
+        "aggregation",
+        "interface",
+        "constructor",
+        "class_diagram",
+        "message_passing",
+        "polymorphic_dispatch",
+        "method_overloading",
+        "facade_pattern",
+        "version_control"
+    ],
+
+    "PM": [
+        "actuation",
+        "encoder",
+        "servo",
+        "calibration",
+        "robotics",
+        "automation",
+        "controller",
+        "circuit",
+        "analog",
+        "digital",
+        "microcontroller",
+        "sensor_array",
+        "actuator",
+        "end_effector",
+        "degrees_of_freedom",
+        "closed_loop",
+        "open_loop",
+        "firmware",
+        "pid_control",
+        "power_budget"
+    ],
+
+    "SSA": [
+        "malware",
+        "phishing",
+        "token",
+        "firewall",
+        "cipher",
+        "payload",
+        "breach",
+        "sandbox",
+        "checksum",
+        "backdoor",
+        "data_protection",
+        "confidentiality",
+        "integrity",
+        "availability",
+        "authentication",
+        "authorisation",
+        "accountability",
+        "input_validation",
+        "sanitisation",
+        "session_management"
+    ],
+
+    "PFTW": [
+        "cookie",
+        "session",
+        "router",
+        "websocket",
+        "markup",
+        "template",
+        "endpoint",
+        "backend",
+        "frontend",
+        "browser",
+        "http",
+        "https",
+        "tcp_ip",
+        "dns",
+        "ftp",
+        "tls",
+        "sql",
+        "orm",
+        "pwa",
+        "caching"
+    ],
+
+    "SA": [
+        "workflow",
+        "trigger",
+        "pipeline",
+        "scheduler",
+        "build",
+        "deploy",
+        "monitor",
+        "script",
+        "rollback",
+        "job",
+        "machine_learning",
+        "devops",
+        "rpa",
+        "bpa",
+        "supervised_learning",
+        "unsupervised_learning",
+        "regression_model",
+        "neural_network",
+        "decision_tree",
+        "reinforcement_learning"
+    ]
     }
  
     WBwords = programming_terms[difficulty]

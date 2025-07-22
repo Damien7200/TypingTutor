@@ -1,5 +1,409 @@
 {%extends "Typing/base.html"%}
 {%block content%}
     <h1>WORDBANK</h1>
+
+
+
+
+
+<div class="wordbank">
+
+ 
+  <section id="PF" class="wordbank-topic">
+    <h2>Programming Fundamentals</h2>
+    <dl>
+      <dt data-word="compile">compile</dt>
+      <dd>Translate source code into machine or byte code before run.</dd>
+
+      <dt data-word="execute">execute</dt>
+      <dd>Run a program’s instructions on a computer.</dd>
+
+      <dt data-word="operator">operator</dt>
+      <dd>Symbol that performs an action on values (e.g. +, *).</dd>
+
+      <dt data-word="expression">expression</dt>
+      <dd>Combination of values and operators producing a result.</dd>
+
+      <dt data-word="recursion">recursion</dt>
+      <dd>Function calling itself to solve smaller subproblems.</dd>
+
+      <dt data-word="stack">stack</dt>
+      <dd>LIFO data structure; also call stack for function frames.</dd>
+
+      <dt data-word="queue">queue</dt>
+      <dd>FIFO data structure; earliest in, first out.</dd>
+
+      <dt data-word="pointer">pointer</dt>
+      <dd>Variable holding a memory address to data.</dd>
+
+      <dt data-word="algorithm">algorithm</dt>
+      <dd>Finite, ordered steps to solve a defined problem.</dd>
+
+      <dt data-word="pseudocode">pseudocode</dt>
+      <dd>Structured, language‑neutral description of an algorithm.</dd>
+
+      <dt data-word="flowchart">flowchart</dt>
+      <dd>Diagram showing control flow through process steps.</dd>
+
+      <dt data-word="specification">specification</dt>
+      <dd>Formal statement of what software must do.</dd>
+
+      <dt data-word="integration">integration</dt>
+      <dd>Combining modules and ensuring they work together.</dd>
+
+      <dt data-word="debugging">debugging</dt>
+      <dd>Finding and fixing faults in code or logic.</dd>
+
+      <dt data-word="maintenance">maintenance</dt>
+      <dd>Post‑release updates: fixes, enhancements, adaptation.</dd>
+
+      <dt data-word="selection">selection</dt>
+      <dd>Branching control; choose path via condition.</dd>
+
+      <dt data-word="iteration">iteration</dt>
+      <dd>Repeat a block of code using loops.</dd>
+
+      <dt data-word="abstraction">abstraction</dt>
+      <dd>Hide detail; focus on essential behaviour.</dd>
+
+      <dt data-word="data_structure">data_structure</dt>
+      <dd>Organised format for storing and accessing data efficiently.</dd>
+
+      <dt data-word="twos_complement">twos_complement</dt>
+      <dd>Binary encoding for signed integers using bit inversion + 1.</dd>
+    </dl>
+  </section>
+
+
+  <section id="OOP" class="wordbank-topic">
+    <h2>Object‑Oriented Programming</h2>
+    <dl>
+      <dt data-word="abstraction">abstraction</dt>
+      <dd>Expose essential interface; hide implementation detail.</dd>
+
+      <dt data-word="inheritance">inheritance</dt>
+      <dd>New class reuses and extends behaviour of a base class.</dd>
+
+      <dt data-word="polymorphism">polymorphism</dt>
+      <dd>Same call behaves differently by object type.</dd>
+
+      <dt data-word="encapsulation">encapsulation</dt>
+      <dd>Bundle data and methods; control outside access.</dd>
+
+      <dt data-word="override">override</dt>
+      <dd>Subclass method replaces superclass version.</dd>
+
+      <dt data-word="attribute">attribute</dt>
+      <dd>Named data stored on an object or class.</dd>
+
+      <dt data-word="prototype">prototype</dt>
+      <dd>Base object used for cloning or inheritance (JS style).</dd>
+
+      <dt data-word="module">module</dt>
+      <dd>Reusable file or unit of related code.</dd>
+
+      <dt data-word="composition">composition</dt>
+      <dd>Object built from other objects it owns.</dd>
+
+      <dt data-word="association">association</dt>
+      <dd>General relationship between two object types.</dd>
+
+      <dt data-word="generalisation">generalisation</dt>
+      <dd>Abstract common traits into a broader superclass.</dd>
+
+      <dt data-word="aggregation">aggregation</dt>
+      <dd>Whole‑part link; parts can outlive the whole.</dd>
+
+      <dt data-word="interface">interface</dt>
+      <dd>Declared set of methods a class agrees to implement.</dd>
+
+      <dt data-word="constructor">constructor</dt>
+      <dd>Special method that initialises new instances.</dd>
+
+      <dt data-word="class_diagram">class_diagram</dt>
+      <dd>UML view of classes, attributes, and relationships.</dd>
+
+      <dt data-word="message_passing">message_passing</dt>
+      <dd>Objects invoke behaviour by sending messages or calls.</dd>
+
+      <dt data-word="polymorphic_dispatch">polymorphic_dispatch</dt>
+      <dd>Runtime method selection based on actual object type.</dd>
+
+      <dt data-word="method_overloading">method_overloading</dt>
+      <dd>Multiple methods same name; differ by parameters.</dd>
+
+      <dt data-word="facade_pattern">facade_pattern</dt>
+      <dd>Unified API hiding a complex subsystem.</dd>
+
+      <dt data-word="version_control">version_control</dt>
+      <dd>Track and manage changes across source files.</dd>
+    </dl>
+  </section>
+
+
+  <section id="PM" class="wordbank-topic">
+    <h2>Programming Mechatronics</h2>
+    <dl>
+      <dt data-word="actuation">actuation</dt>
+      <dd>Driving a mechanism to produce motion or effect.</dd>
+
+      <dt data-word="encoder">encoder</dt>
+      <dd>Sensor producing position or motion feedback signals.</dd>
+
+      <dt data-word="servo">servo</dt>
+      <dd>Motor with feedback for precise position control.</dd>
+
+      <dt data-word="calibration">calibration</dt>
+      <dd>Adjust system to known reference for accuracy.</dd>
+
+      <dt data-word="robotics">robotics</dt>
+      <dd>Design and control of programmable mechanical systems.</dd>
+
+      <dt data-word="automation">automation</dt>
+      <dd>Perform tasks with minimal human intervention.</dd>
+
+      <dt data-word="controller">controller</dt>
+      <dd>Hardware or software regulating system behaviour.</dd>
+
+      <dt data-word="circuit">circuit</dt>
+      <dd>Electrical path enabling current and signal flow.</dd>
+
+      <dt data-word="analog">analog</dt>
+      <dd>Continuous‑valued electrical signals.</dd>
+
+      <dt data-word="digital">digital</dt>
+      <dd>Discrete binary or quantised signals.</dd>
+
+      <dt data-word="microcontroller">microcontroller</dt>
+      <dd>Single‑chip computer for embedded control tasks.</dd>
+
+      <dt data-word="sensor_array">sensor_array</dt>
+      <dd>Multiple sensors combined for richer input data.</dd>
+
+      <dt data-word="actuator">actuator</dt>
+      <dd>Device that converts energy into mechanical motion.</dd>
+
+      <dt data-word="end_effector">end_effector</dt>
+      <dd>Tool at a robot arm’s working end.</dd>
+
+      <dt data-word="degrees_of_freedom">degrees_of_freedom</dt>
+      <dd>Independent axes of movement in a mechanism.</dd>
+
+      <dt data-word="closed_loop">closed_loop</dt>
+      <dd>Control using feedback to adjust output.</dd>
+
+      <dt data-word="open_loop">open_loop</dt>
+      <dd>Control without feedback; assumes action succeeds.</dd>
+
+      <dt data-word="firmware">firmware</dt>
+      <dd>Persistent low‑level software in device memory.</dd>
+
+      <dt data-word="pid_control">pid_control</dt>
+      <dd>Feedback using proportional, integral, derivative terms.</dd>
+
+      <dt data-word="power_budget">power_budget</dt>
+      <dd>Allocated energy limits across system components.</dd>
+    </dl>
+  </section>
+
+
+  <section id="SSA" class="wordbank-topic">
+    <h2>Secure Software Architecture</h2>
+    <dl>
+      <dt data-word="malware">malware</dt>
+      <dd>Malicious software designed to harm or exploit.</dd>
+
+      <dt data-word="phishing">phishing</dt>
+      <dd>Deceptive attempt to steal credentials or data.</dd>
+
+      <dt data-word="token">token</dt>
+      <dd>Encoded credential proving identity or authorisation.</dd>
+
+      <dt data-word="firewall">firewall</dt>
+      <dd>Filters network traffic by policy to reduce attacks.</dd>
+
+      <dt data-word="cipher">cipher</dt>
+      <dd>Algorithm for transforming plaintext to ciphertext.</dd>
+
+      <dt data-word="payload">payload</dt>
+      <dd>Executable or action delivered by an attack.</dd>
+
+      <dt data-word="breach">breach</dt>
+      <dd>Unauthorised access or disclosure of data.</dd>
+
+      <dt data-word="sandbox">sandbox</dt>
+      <dd>Isolated environment limiting code impact.</dd>
+
+      <dt data-word="checksum">checksum</dt>
+      <dd>Calculated value to detect data corruption.</dd>
+
+      <dt data-word="backdoor">backdoor</dt>
+      <dd>Hidden access bypassing normal authentication.</dd>
+
+      <dt data-word="data_protection">data_protection</dt>
+      <dd>Safeguards to prevent loss, theft, or misuse of data.</dd>
+
+      <dt data-word="confidentiality">confidentiality</dt>
+      <dd>Ensure data is accessible only to authorised parties.</dd>
+
+      <dt data-word="integrity">integrity</dt>
+      <dd>Protect data from unauthorised alteration.</dd>
+
+      <dt data-word="availability">availability</dt>
+      <dd>Systems and data remain usable when needed.</dd>
+
+      <dt data-word="authentication">authentication</dt>
+      <dd>Verify a user or system is who it claims.</dd>
+
+      <dt data-word="authorisation">authorisation</dt>
+      <dd>Grant permitted actions after authentication.</dd>
+
+      <dt data-word="accountability">accountability</dt>
+      <dd>Trace actions to specific users or systems.</dd>
+
+      <dt data-word="input_validation">input_validation</dt>
+      <dd>Check incoming data meets expected rules.</dd>
+
+      <dt data-word="sanitisation">sanitisation</dt>
+      <dd>Clean or escape input to remove dangerous parts.</dd>
+
+      <dt data-word="session_management">session_management</dt>
+      <dd>Securely track user state across requests.</dd>
+    </dl>
+  </section>
+
+
+  <section id="PFTW" class="wordbank-topic">
+    <h2>Programming for the Web</h2>
+    <dl>
+      <dt data-word="cookie">cookie</dt>
+      <dd>Small data stored in browser for session/state.</dd>
+
+      <dt data-word="session">session</dt>
+      <dd>Server‑tracked state across multiple requests.</dd>
+
+      <dt data-word="router">router</dt>
+      <dd>Device or code layer that forwards network traffic.</dd>
+
+      <dt data-word="websocket">websocket</dt>
+      <dd>Full‑duplex persistent connection between client and server.</dd>
+
+      <dt data-word="markup">markup</dt>
+      <dd>Tagged text describing document structure (e.g. HTML).</dd>
+
+      <dt data-word="template">template</dt>
+      <dd>HTML pattern filled with dynamic data at render.</dd>
+
+      <dt data-word="endpoint">endpoint</dt>
+      <dd>Specific URL where an API receives requests.</dd>
+
+      <dt data-word="backend">backend</dt>
+      <dd>Server logic, data storage, and processing.</dd>
+
+      <dt data-word="frontend">frontend</dt>
+      <dd>User‑facing interface running in the browser.</dd>
+
+      <dt data-word="browser">browser</dt>
+      <dd>Client application that renders and runs web content.</dd>
+
+      <dt data-word="http">http</dt>
+      <dd>Stateless protocol for web data transfer.</dd>
+
+      <dt data-word="https">https</dt>
+      <dd>HTTP over TLS encryption for secure transfer.</dd>
+
+      <dt data-word="tcp_ip">tcp_ip</dt>
+      <dd>Core internet transport and addressing protocols.</dd>
+
+      <dt data-word="dns">dns</dt>
+      <dd>Maps domain names to IP addresses.</dd>
+
+      <dt data-word="ftp">ftp</dt>
+      <dd>File transfer protocol; SFTP/FTPS add security.</dd>
+
+      <dt data-word="tls">tls</dt>
+      <dd>Cryptographic protocol securing network traffic.</dd>
+
+      <dt data-word="sql">sql</dt>
+      <dd>Query language for relational databases.</dd>
+
+      <dt data-word="orm">orm</dt>
+      <dd>Maps objects in code to database tables.</dd>
+
+      <dt data-word="pwa">pwa</dt>
+      <dd>Progressive Web App; installable, offline‑capable web app.</dd>
+
+      <dt data-word="caching">caching</dt>
+      <dd>Store copies of data to speed up response time.</dd>
+    </dl>
+  </section>
+
+
+  <section id="SA" class="wordbank-topic">
+    <h2>Software Automation</h2>
+    <dl>
+      <dt data-word="workflow">workflow</dt>
+      <dd>Ordered steps in an automated process.</dd>
+
+      <dt data-word="trigger">trigger</dt>
+      <dd>Event that starts an automated action.</dd>
+
+      <dt data-word="pipeline">pipeline</dt>
+      <dd>Chained automated stages (build, test, deploy).</dd>
+
+      <dt data-word="scheduler">scheduler</dt>
+      <dd>Tool that runs jobs at set times or events.</dd>
+
+      <dt data-word="build">build</dt>
+      <dd>Compile and package code for execution.</dd>
+
+      <dt data-word="deploy">deploy</dt>
+      <dd>Release software to a runtime environment.</dd>
+
+      <dt data-word="monitor">monitor</dt>
+      <dd>Observe system health, performance, and failures.</dd>
+
+      <dt data-word="script">script</dt>
+      <dd>Short program automating routine tasks.</dd>
+
+      <dt data-word="rollback">rollback</dt>
+      <dd>Revert to a previous working version.</dd>
+
+      <dt data-word="job">job</dt>
+      <dd>Discrete automation task run by a system.</dd>
+
+      <dt data-word="machine_learning">machine_learning</dt>
+      <dd>Algorithms that learn patterns from data.</dd>
+
+      <dt data-word="devops">devops</dt>
+      <dd>Practices unifying development and operations automation.</dd>
+
+      <dt data-word="rpa">rpa</dt>
+      <dd>Robotic Process Automation for rule‑based tasks.</dd>
+
+      <dt data-word="bpa">bpa</dt>
+      <dd>Business Process Automation across workflows and systems.</dd>
+
+      <dt data-word="supervised_learning">supervised_learning</dt>
+      <dd>Train models on labelled input‑output pairs.</dd>
+
+      <dt data-word="unsupervised_learning">unsupervised_learning</dt>
+      <dd>Find patterns in unlabelled data.</dd>
+
+      <dt data-word="regression_model">regression_model</dt>
+      <dd>Predict continuous numeric values from features.</dd>
+
+      <dt data-word="neural_network">neural_network</dt>
+      <dd>Layered model inspired by biological neurons.</dd>
+
+      <dt data-word="decision_tree">decision_tree</dt>
+      <dd>Tree of splits used for prediction or classification.</dd>
+
+      <dt data-word="reinforcement_learning">reinforcement_learning</dt>
+      <dd>Learn actions by maximising reward signals.</dd>
+    </dl>
+  </section>
+
+</div>
+
 {%endblock%}
-{% comment %} have this with a dropdown {% endcomment %}
